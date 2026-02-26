@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher Dashboard</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+.login { max-width: 400px; margin: 150px auto; background: white; padding: 50px; border-radius: 8px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.login h1 { margin-bottom: 10px; color: #333; }
+.login p { color: #666; margin-bottom: 30px; }
+input { width: 100%; padding: 12px; margin: 10px 0; font-size: 16px; border: 1px solid #ddd; border-radius: 4px; }
+button { width: 100%; padding: 12px; margin: 10px 0; font-size: 16px; background: #d4af37; color: #1a1410; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+button:hover { background: #c9a961; }
+.hidden { display: none !important; }
+.dashboard { max-width: 1200px; margin: 0 auto; }
+.header { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.header h1 { color: #333; }
+.filters { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; gap: 20px; flex-wrap: wrap; }
+.filter-group { display: flex; flex-direction: column; gap: 5px; }
+.filter-group label { font-weight: bold; color: #333; font-size: 14px; }
+.filter-group select { padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+th { background: #f9f9f9; font-weight: bold; color: #333; }
+tr:hover { background: #f5f5f5; }
+.score-0 { color: #c62828; font-weight: bold; }
+.score-1 { color: #e65100; font-weight: bold; }
+.score-2 { color: #558b2f; font-weight: bold; }
+.score-3 { color: #2e7d32; font-weight: bold; }
+.truncate { max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; color: #1976d2; }
+.truncate:hover { text-decoration: underline; }
+.modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000; }
+.modal.show { display: flex; }
+.modal-content { background: white; padding: 30px; border-radius: 8px; max-width: 600px; max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.modal-content h2 { margin-bottom: 15px; color: #333; }
+.modal-content p { white-space: pre-wrap; line-height: 1.6; color: #666; }
+.modal-close { background: #999; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-top: 20px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px; }
+.stat { background: white; padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.stat h3 { color: #666; font-size: 14px; margin-bottom: 10px; text-transform: uppercase; }
+.stat .number { font-size: 32px; font-weight: bold; color: #d4af37; }
+</style>
+</head>
+<body>
+
+<div id="login" class="login">
+  <h1>Teacher Dashboard</h1>
+  <p>Civil Rights Reading Tasks</p>
+  <input type="password" id="pin" placeholder="Enter PIN" onkeypress="if(event.key==='Enter') login()">
+  <button onclick="login()">Login</button>
+</div>
+
+<div id="dashboard" class="dashboard hidden">
+  <div class="header">
+    <h1>Student Submissions</h1>
+    <button onclick="logout()">Logout</button>
+  </div>
+  
+  <div class="stats" id="stats"></div>
+  
+  <div class="filters">
+    <div class="filter-group">
+      <label>Filter by Student:</label>
+      <select id="studentFilter" onchange="render()">
+        <option value="">All Students</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Filter by Task:</label>
+      <select id="taskFilter" onchange="render()">
+        <option value="">All Tasks</option>
+        <option value="1">Task 1: Stamp Act</option>
+        <option value="2">Task 2: Boston Massacre</option>
+        <option value="3">Task 3: Boston Tea Party</option>
+        <option value="4">Task 4: Declaration</option>
+        <option value="5">Task 5: Constitutional Convention</option>
+        <option value="6">Task 6: Civil War</option>
+        <option value="7">Task 7: Reconstruction</option>
+        <option value="8">Task 8: Jim Crow</option>
+        <option value="9">Task 9: Civil Rights</option>
+        <option value="10">Task 10: Know Your Rights</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Filter by Score:</label>
+      <select id="scoreFilter" onchange="render()">
+        <option value="">All Scores</option>
+        <option value="0">0 - Not Yet</option>
+        <option value="1">1 - Getting There</option>
+        <option value="2">2 - Almost There</option>
+        <option value="3">3 - Perfect</option>
+      </select>
+    </div>
+  </div>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Student</th>
+        <th>Task</th>
+        <th>Score</th>
+        <th>Answer</th>
+        <th>Feedback</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+      <tr><td colspan="6">Loading...</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+    <button class="modal-close" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+const PIN = '9999';
+let data = [];
+
+function login() {
+  if (document.getElementById('pin').value === PIN) {
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('dashboard').classList.remove('hidden');
+    load();
+  } else {
+    alert('Wrong PIN');
+  }
+}
+
+function logout() {
+  document.getElementById('login').classList.remove('hidden');
+  document.getElementById('dashboard').classList.add('hidden');
+  document.getElementById('pin').value = '';
+}
+
+function load() {
+  data = JSON.parse(localStorage.getItem('civilRightsSubmissions') || '[]');
+  const students = [...new Set(data.map(d => d.student))].sort();
+  const select = document.getElementById('studentFilter');
+  students.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s;
+    opt.text = s;
+    select.appendChild(opt);
+  });
+  updateStats();
+  render();
+}
+
+function updateStats() {
+  const total = data.length;
+  const mastered = data.filter(d => d.score >= 2).length;
+  const avg = total > 0 ? (data.reduce((s, d) => s + d.score, 0) / total).toFixed(1) : 0;
+  const students = [...new Set(data.map(d => d.student))].length;
+  
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><h3>Total Submissions</h3><div class="number">${total}</div></div>
+    <div class="stat"><h3>Mastered (2+)</h3><div class="number">${mastered}</div></div>
+    <div class="stat"><h3>Avg Score</h3><div class="number">${avg}</div></div>
+    <div class="stat"><h3>Students</h3><div class="number">${students}</div></div>
+  `;
+}
+
+function render() {
+  const student = document.getElementById('studentFilter').value;
+  const task = document.getElementById('taskFilter').value;
+  const score = document.getElementById('scoreFilter').value;
+  
+  let filtered = data;
+  if (student) filtered = filtered.filter(d => d.student === student);
+  if (task) filtered = filtered.filter(d => d.task === task);
+  if (score) filtered = filtered.filter(d => d.score === parseInt(score));
+  
+  const tbody = document.getElementById('tbody');
+  if (filtered.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6">No submissions</td></tr>';
+    return;
+  }
+  
+  tbody.innerHTML = filtered.map(d => `
+    <tr>
+      <td>${d.student}</td>
+      <td>Task ${d.task}</td>
+      <td><span class="score-${d.score}">${d.score}</span></td>
+      <td><span class="truncate" onclick="showModal('Student Answer', '${escapeHtml(d.answer)}')">${truncate(d.answer, 40)}</span></td>
+      <td><span class="truncate" onclick="showModal('Feedback', '${escapeHtml(d.feedback)}')">${truncate(d.feedback, 40)}</span></td>
+      <td>${new Date(d.date).toLocaleDateString()}</td>
+    </tr>
+  `).join('');
+}
+
+function truncate(s, len) {
+  return s.length > len ? s.substring(0, len) + '...' : s;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function showModal(title, text) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalText').textContent = text;
+  document.getElementById('modal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
+}
+</script>
+
+</body>
+</html>
