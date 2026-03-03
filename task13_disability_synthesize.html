@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access for All</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: linear-gradient(135deg, #f5ede0 0%, #ede5d9 100%); font-family: 'Source Serif 4', serif; color: #2c2416; line-height: 1.8; min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: rgba(255, 250, 245, 0.95); border-radius: 12px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08); padding: 40px; }
+        .attempt-counter { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: #6b5d52; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #e8dfd5; }
+        .attempt-dots { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+        .attempt-dot { width: 20px; height: 20px; border-radius: 50%; background: #e8dfd5; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; color: #6b5d52; }
+        .attempt-dot.active { background: #d4af37; color: #1a1410; }
+        .legendary-badge { background: linear-gradient(135deg, #d4af37 0%, #f0e68c 50%, #d4af37 100%); color: #1a1410; font-family: 'Cinzel', serif; font-weight: bold; font-size: 0.85rem; letter-spacing: 2px; padding: 6px 12px; border-radius: 20px; display: inline-block; margin-bottom: 20px; text-transform: uppercase; }
+        .hero { text-align: center; margin-bottom: 40px; }
+        h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #1a1410; margin-bottom: 10px; }
+        .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: #6b5d52; margin-bottom: 30px; }
+        .learning-objective { background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05)); border-left: 4px solid #d4af37; padding: 20px; margin-bottom: 30px; border-radius: 6px; }
+        .learning-objective p { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; line-height: 1.6; }
+        .strategy-section { background: #fdfbf7; border-radius: 8px; padding: 25px; margin-bottom: 30px; border: 1px solid #e8dfd5; }
+        .strategy-section h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #1a1410; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .strategy-bullets { list-style: none; padding-left: 0; }
+        .strategy-bullets li { padding: 8px 0 8px 30px; position: relative; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; line-height: 1.5; }
+        .strategy-bullets li:before { content: "→"; position: absolute; left: 0; color: #d4af37; font-weight: bold; }
+        .context { background: #fdf9f3; padding: 20px; border-radius: 8px; margin-bottom: 30px; border-left: 4px solid #c9a961; font-size: 0.95rem; line-height: 1.7; }
+        .passage-section { background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #e8dfd5; }
+        .passage-section h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #1a1410; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .passage { font-family: 'Source Serif 4', serif; font-size: 1rem; line-height: 1.8; color: #2c2416; }
+        .passage p { margin-bottom: 15px; }
+        .vocab-term { border-bottom: 2px solid #d4af37; cursor: help; position: relative; font-weight: 600; }
+        .tooltip { visibility: hidden; background-color: #1a1410; color: #f5ede0; text-align: center; padding: 8px 12px; border-radius: 6px; position: absolute; z-index: 1; bottom: 125%; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.8rem; font-family: 'DM Sans', sans-serif; font-weight: normal; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+        .vocab-term:hover .tooltip { visibility: visible; }
+        .form-section { background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #e8dfd5; }
+        .form-section h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #1a1410; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { font-family: 'DM Sans', sans-serif; font-weight: 600; display: block; margin-bottom: 10px; color: #1a1410; font-size: 0.95rem; }
+        .form-group textarea { width: 100%; padding: 15px; border: 2px solid #e8dfd5; border-radius: 6px; font-family: 'Source Serif 4', serif; font-size: 0.95rem; line-height: 1.6; min-height: 100px; transition: border-color 0.3s; }
+        .form-group textarea:focus { outline: none; border-color: #d4af37; box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1); }
+        .submit-btn { background: linear-gradient(135deg, #1a1410, #3d3228); color: #f5ede0; border: 2px solid #d4af37; padding: 14px 40px; font-size: 1rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.3s; }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3); }
+        .submit-btn.loading { opacity: 0.7; cursor: not-allowed; }
+        .feedback-section { display: none; margin-top: 30px; padding: 25px; border-radius: 8px; animation: slideIn 0.5s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback-section.show { display: block; }
+        .score-banner { padding: 20px; border-radius: 8px; margin-bottom: 20px; font-family: 'Cinzel', serif; font-size: 1.3rem; text-align: center; font-weight: bold; }
+        .score-0 { background: #ffebee; color: #c62828; border: 2px solid #c62828; }
+        .score-1 { background: #fff3e0; color: #e65100; border: 2px solid #e65100; }
+        .score-2 { background: #f1f8e9; color: #558b2f; border: 2px solid #558b2f; }
+        .score-3 { background: #e8f5e9; color: #2e7d32; border: 2px solid #2e7d32; }
+        .feedback-content { background: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 6px; margin-bottom: 15px; }
+        .feedback-strength, .feedback-improve, .feedback-next { margin-bottom: 15px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; line-height: 1.6; }
+        .feedback-label { font-weight: 600; color: #1a1410; margin-bottom: 5px; }
+        .feedback-text { color: #4a4238; margin-left: 15px; padding-left: 10px; border-left: 3px solid #d4af37; }
+        .revision-checklist { background: rgba(241, 248, 233, 0.5); padding: 15px; border-radius: 6px; border-left: 4px solid #558b2f; }
+        .revision-checklist .feedback-label { margin-bottom: 10px; }
+        .checklist-item { display: flex; align-items: flex-start; margin-bottom: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; cursor: pointer; }
+        .checklist-item input[type="checkbox"] { margin-right: 10px; margin-top: 3px; cursor: pointer; }
+        .checklist-item label { cursor: pointer; flex: 1; margin: 0; font-weight: normal; }
+        .revision-btn { background: linear-gradient(135deg, #558b2f, #689f38); color: white; border: none; padding: 12px 30px; font-size: 0.95rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; margin-top: 15px; }
+        .success-screen { display: none; text-align: center; padding: 40px 20px; }
+        .success-screen.show { display: block; }
+        .success-animation { font-size: 4rem; margin-bottom: 20px; animation: bounce 0.8s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .success-message { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #2e7d32; margin-bottom: 15px; }
+        .success-card { background: linear-gradient(135deg, #d4af37, #f0e68c); padding: 30px; border-radius: 12px; margin: 30px 0; box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3); color: #1a1410; }
+        .success-card h3 { font-family: 'Cinzel', serif; font-size: 1.3rem; margin-bottom: 10px; text-transform: uppercase; }
+        .submission-form { background: #f5f5f5; padding: 30px; border-radius: 8px; margin: 30px 0; }
+        .submission-form h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #1a1410; margin-bottom: 20px; text-transform: uppercase; }
+        .submission-form select { width: 100%; padding: 12px; margin-bottom: 10px; font-family: 'DM Sans', sans-serif; font-size: 1rem; border: 1px solid #ddd; border-radius: 4px; }
+        .submission-btn { background: #d4af37; color: #1a1410; border: none; padding: 12px 30px; font-size: 1rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; transition: all 0.3s; margin-top: 10px; }
+        .submission-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(212, 175, 55, 0.3); }
+        .submission-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .reset-btn { background: linear-gradient(135deg, #1a1410, #3d3228); color: #f5ede0; border: 2px solid #d4af37; padding: 12px 30px; font-size: 0.95rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; margin-top: 20px; }
+        .reset-btn:hover { box-shadow: 0 6px 16px rgba(212, 175, 55, 0.3); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="attempt-counter"><span style="margin-right: 10px;">Your attempts:</span><div class="attempt-dots" id="attemptDots"></div></div>
+        <div class="hero">
+            <div class="legendary-badge">⚔️ LEGENDARY</div>
+            <h1>Access for All</h1>
+            <p class="subtitle">A Reading Task on Women's Rights</p>
+        </div>
+        <div class="learning-objective"><p><strong>I can identify the central idea about why women fought for equal rights.</strong></p></div>
+        <div class="strategy-section">
+            <h3>📚 Central Idea</h3>
+            <ul class="strategy-bullets">
+                <li>The central idea is the most important message.</li>
+                <li>Look for what the author thinks is most important.</li>
+                <li>Ask: What is this really about?</li>
+                <li>Use details to prove the main idea.</li>
+            </ul>
+        </div>
+        <div class="context"><strong>Why this story matters:</strong> For most of American history, women couldn't vote. They couldn't own property. They couldn't be lawyers or doctors. Women had to fight for 72 years to get the right to vote. Understanding this struggle shows that rights aren't automatic—people have to fight for them.</div>
+        <div class="passage-section">
+            <h3>📖 Reading Passage</h3>
+            <div class="passage">
+                <p><strong>Women's Suffrage: The Right to Vote</strong></p>
+                <p>For over 100 years after America was founded, women couldn't vote. Laws said only men could vote. Women also couldn't own property if they were married. Husbands owned everything. Women couldn't be lawyers, doctors, or many other jobs. In 1848, a group of women met in Seneca Falls, New York. They wrote a document called the Declaration of Sentiments. It said women were equal to men and deserved equal rights. The first right they demanded was the right to <span class="vocab-term">vote<span class="tooltip">choose leaders through elections</span></span>.</p>
+                <p>For 72 years, women <span class="vocab-term">advocated<span class="tooltip">argued for; fought for</span></span> for voting rights. Susan B. Anthony was arrested for voting illegally. Elizabeth Cady Stanton gave speeches. Women marched in parades. Some were put in jail. But they didn't give up. In 1920, the 19th Amendment was finally passed. It said women had the right to vote. After 72 years of fighting, women could finally have a say in their government.</p>
+                <p>But winning the right to vote was just one victory. Women still fought for equal pay, equal jobs, and respect. The struggle for women's rights didn't end in 1920. It continues today. Understanding women's suffrage teaches us that change takes time, hard work, and never giving up on what's right.</p>
+            </div>
+        </div>
+        <div class="form-section" id="formSection">
+            <h3>📝 Your Response</h3>
+            <div class="form-group">
+                <label for="mainAnswer"><strong>Main Question:</strong> What is the central idea about why women fought for voting rights? Write 2–3 sentences.</label>
+                <textarea id="mainAnswer" placeholder="Write your answer here..."></textarea>
+            </div>
+            <button class="submit-btn" id="submitBtn" onclick="submitResponse()">Submit Your Response</button>
+        </div>
+        <div class="feedback-section" id="feedbackSection">
+            <div class="score-banner" id="scoreBanner"></div>
+            <div class="feedback-content">
+                <div class="feedback-strength"><div class="feedback-label">✓ What You Did Well:</div><div class="feedback-text" id="strengthText"></div></div>
+                <div class="feedback-improve"><div class="feedback-label">⚡ One Thing to Strengthen:</div><div class="feedback-text" id="improveText"></div></div>
+                <div class="feedback-next"><div class="feedback-label">→ Next Step:</div><div class="feedback-text" id="nextText"></div></div>
+                <div class="revision-checklist" id="checklistContainer" style="display:none;"><div class="feedback-label">Before You Revise, Check:</div><div id="checklistItems"></div></div>
+            </div>
+            <button class="revision-btn" id="revisionBtn" onclick="prepareRevision()" style="display:none;">Try Again</button>
+        </div>
+        <div class="success-screen" id="successScreen">
+            <div class="success-animation">🎉</div>
+            <div class="success-message">Excellent Work!</div>
+            <p style="font-family: 'DM Sans', sans-serif; font-size: 1rem; color: #4a4238; margin-bottom: 20px;">You understood the struggle for equality!</p>
+            <div class="success-card"><h3>Card Unlocked</h3><p style="font-family: 'DM Sans', sans-serif; margin-bottom: 0;">Women's Rights — Legendary Tier</p></div>
+            <div class="submission-form">
+                <h3>Submit Your Work to Teacher</h3>
+                <label for="studentName">Your Name:</label>
+                <select id="studentName"><option value="">Select your name</option><option value="Alexandra">Alexandra</option><option value="Alice">Alice</option><option value="Angie">Angie</option><option value="Brett">Brett</option><option value="Caleb K">Caleb K</option><option value="Caleb V">Caleb V</option><option value="Elise">Elise</option><option value="Elijah">Elijah</option><option value="Emerie">Emerie</option><option value="Gavin">Gavin</option><option value="Henry">Henry</option><option value="James">James</option><option value="Jasmine">Jasmine</option><option value="Kawin">Kawin</option><option value="Kenadie">Kenadie</option><option value="Kolumbiauna">Kolumbiauna</option><option value="Lucas">Lucas</option><option value="Mason">Mason</option><option value="Mathis">Mathis</option><option value="Nash">Nash</option><option value="Savannagh">Savannagh</option><option value="Serena">Serena</option><option value="Siddhraj">Siddhraj</option><option value="Tre">Tre</option><option value="Victoria">Victoria</option><option value="Vyohan">Vyohan</option><option value="Zane">Zane</option></select>
+                <button id="submitToTeacherBtn" class="submission-btn" onclick="submitToTeacher(13)">Submit to Teacher Dashboard</button>
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: #6b5d52; margin-top: 10px; text-align: center;">Your response is locked when submitted.</p>
+            </div>
+            <button class="reset-btn" onclick="resetForm()">Do Another Task</button>
+        </div>
+    </div>
+    <script>
+        let currentAttempt = 0;
+        updateAttemptDisplay();
+        function updateAttemptDisplay() {
+            const dotsContainer = document.getElementById('attemptDots');
+            dotsContainer.innerHTML = '';
+            for (let i = 1; i <= Math.max(currentAttempt, 1); i++) {
+                const dot = document.createElement('div');
+                dot.className = `attempt-dot ${i <= currentAttempt ? 'active' : ''}`;
+                dot.textContent = i;
+                dotsContainer.appendChild(dot);
+            }
+        }
+        function submitResponse() {
+            const answer = document.getElementById('mainAnswer').value.trim();
+            if (!answer) { alert('Please write your response before submitting.'); return; }
+            currentAttempt++; updateAttemptDisplay();
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = 'Scoring...';
+            submitBtn.disabled = true;
+            setTimeout(() => {
+                const feedback = scoreLocallyTask11(answer);
+                displayFeedback(feedback);
+                submitBtn.classList.remove('loading');
+                submitBtn.textContent = 'Submit Your Response';
+                submitBtn.disabled = false;
+            }, 1500);
+        }
+        function scoreLocallyTask11(answer) {
+            const answerLower = answer.toLowerCase();
+            let score = 0, strength = '', improve = '', next = '', checklist = '';
+            const hasVote = /vote|voting|equal|rights/.test(answerLower);
+            const hasWomen = /women|fight|struggle|suffrage/.test(answerLower);
+            const hasWhy = /because|so|unfair|fair|deserve|equal/.test(answerLower);
+            const hasLength = answer.split(' ').length > 12;
+            if ((hasVote && hasWomen && hasWhy && hasLength) || (hasVote && hasWomen && hasLength)) {
+                score = 3; strength = 'Perfect! You got the main idea.'; improve = 'Nothing! Great work!'; next = 'Excellent!';
+            } else if ((hasVote && hasWomen) || (hasWomen && hasWhy)) {
+                score = 2; strength = 'Good! You understood the main point.'; improve = 'Add more about why voting rights mattered.'; next = 'Try again with the checklist.'; checklist = 'Did you say women fought for voting rights? Did you say why?';
+            } else if (hasVote || hasWomen) {
+                score = 1; strength = 'You found important information!'; improve = 'Think about the bigger idea—why did women NEED to fight?'; next = 'Reread and think: What was unfair?'; checklist = 'What did women want? Why was it important?';
+            } else {
+                score = 0; strength = 'You tried!'; improve = 'Reread the passage about women.'; next = 'Think: What were women fighting for?'; checklist = 'Is your answer about women and voting?';
+            }
+            return `SCORE:${score}\nSTRENGTH:${strength}\nIMPROVE:${improve}\nNEXT:${next}\nCHECKLIST:${checklist}`;
+        }
+        function displayFeedback(feedbackText) {
+            const lines = feedbackText.split('\n').filter(l => l.trim());
+            let score = 0, strength = '', improve = '', next = '', checklist = '';
+            lines.forEach(line => {
+                if (line.startsWith('SCORE:')) score = parseInt(line.replace('SCORE:', ''));
+                else if (line.startsWith('STRENGTH:')) strength = line.replace('STRENGTH:', '').trim();
+                else if (line.startsWith('IMPROVE:')) improve = line.replace('IMPROVE:', '').trim();
+                else if (line.startsWith('NEXT:')) next = line.replace('NEXT:', '').trim();
+                else if (line.startsWith('CHECKLIST:')) checklist = line.replace('CHECKLIST:', '').trim();
+            });
+            const scoreTexts = ['Not Yet', 'Getting There', 'Almost There', 'Perfect!'];
+            const scoreClasses = ['score-0', 'score-1', 'score-2', 'score-3'];
+            document.getElementById('scoreBanner').textContent = `Score: ${score}/3 — ${scoreTexts[score]}`;
+            document.getElementById('scoreBanner').className = `score-banner ${scoreClasses[score]}`;
+            document.getElementById('strengthText').textContent = strength;
+            document.getElementById('improveText').textContent = improve;
+            document.getElementById('nextText').textContent = next;
+            const feedbackSection = document.getElementById('feedbackSection');
+            feedbackSection.classList.add('show');
+            if (score < 2) {
+                const checklistContainer = document.getElementById('checklistContainer');
+                checklistContainer.style.display = 'block';
+                const items = checklist.split('?').filter(i => i.trim());
+                let checklistHTML = '';
+                items.forEach((item, idx) => { checklistHTML += `<div class="checklist-item"><input type="checkbox" id="check_${idx}"><label for="check_${idx}"> ${item.trim()}</label></div>`; });
+                document.getElementById('checklistItems').innerHTML = checklistHTML;
+                document.getElementById('revisionBtn').style.display = 'block';
+            } else {
+                document.getElementById('successScreen').classList.add('show');
+                document.querySelector('.form-section').style.display = 'none';
+            }
+            window.scrollTo(0, document.getElementById('feedbackSection').offsetTop - 100);
+        }
+        function prepareRevision() {
+            document.getElementById('mainAnswer').value = '';
+            document.getElementById('feedbackSection').classList.remove('show');
+            document.getElementById('revisionBtn').style.display = 'none';
+            document.getElementById('checklistContainer').style.display = 'none';
+            window.scrollTo(0, document.querySelector('.form-section').offsetTop - 100);
+        }
+        function submitToTeacher(taskNumber) {
+            const studentName = document.getElementById('studentName').value;
+            if (!studentName) { alert('Please select your name before submitting.'); return; }
+            const feedback = document.getElementById('feedbackSection')?.innerText || 'Feedback not captured';
+            const answer = document.getElementById('mainAnswer').value;
+            const scoreMatch = document.getElementById('scoreBanner')?.innerText.match(/(\d)/);
+            const score = scoreMatch ? parseInt(scoreMatch[1]) : 0;
+            const submission = { student: studentName, task: taskNumber.toString(), score: score, feedback: feedback, answer: answer, date: new Date().toISOString() };
+            let submissions = JSON.parse(localStorage.getItem('civilRightsSubmissions') || '[]');
+            submissions.push(submission);
+            localStorage.setItem('civilRightsSubmissions', JSON.stringify(submissions));
+            alert('✅ Submitted! Your work has been sent to your teacher.');
+            const btn = document.getElementById('submitToTeacherBtn');
+            btn.disabled = true;
+            btn.textContent = 'Submitted ✓';
+        }
+        function resetForm() {
+            currentAttempt = 0; updateAttemptDisplay();
+            document.getElementById('mainAnswer').value = '';
+            document.getElementById('feedbackSection').classList.remove('show');
+            document.getElementById('successScreen').classList.remove('show');
+            document.querySelector('.form-section').style.display = 'block';
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('submitToTeacherBtn').disabled = false;
+            document.getElementById('submitToTeacherBtn').textContent = 'Submit to Teacher Dashboard';
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
