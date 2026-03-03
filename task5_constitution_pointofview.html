@@ -6,701 +6,142 @@
     <title>Whose Voice Gets Heard?</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            background: linear-gradient(135deg, #f5ede0 0%, #ede5d9 100%);
-            font-family: 'Source Serif 4', serif;
-            color: #2c2416;
-            line-height: 1.8;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 250, 245, 0.95);
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-            padding: 40px;
-            position: relative;
-        }
-        
-        .attempt-counter {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.85rem;
-            color: #6b5d52;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e8dfd5;
-        }
-        
-        .attempt-dots {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-top: 8px;
-        }
-        
-        .attempt-dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #e8dfd5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: bold;
-            color: #6b5d52;
-        }
-        
-        .attempt-dot.active {
-            background: #d4af37;
-            color: #1a1410;
-        }
-        
-        .legendary-badge {
-            background: linear-gradient(135deg, #d4af37 0%, #f0e68c 50%, #d4af37 100%);
-            color: #1a1410;
-            font-family: 'Cinzel', serif;
-            font-weight: bold;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            animation: shimmer 3s infinite;
-        }
-        
-        @keyframes shimmer {
-            0%, 100% { opacity: 0.9; }
-            50% { opacity: 1; transform: scale(1.02); }
-        }
-        
-        .hero {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .strategy-card {
-            width: 180px;
-            height: 250px;
-            margin: 0 auto 30px;
-            border-radius: 12px;
-            box-shadow: 
-                0 0 30px rgba(212, 175, 55, 0.4),
-                inset 0 0 20px rgba(212, 175, 55, 0.1);
-            border: 3px solid rgba(212, 175, 55, 0.6);
-            overflow: hidden;
-            animation: float-card 3s ease-in-out infinite;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .strategy-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        @keyframes float-card {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            color: #1a1410;
-            margin-bottom: 10px;
-            letter-spacing: -1px;
-        }
-        
-        .subtitle {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 1rem;
-            color: #6b5d52;
-            margin-bottom: 30px;
-        }
-        
-        .learning-objective {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
-            border-left: 4px solid #d4af37;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 6px;
-        }
-        
-        .learning-objective p {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        
-        .strategy-section {
-            background: #fdfbf7;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border: 1px solid #e8dfd5;
-        }
-        
-        .strategy-section h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            color: #1a1410;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .strategy-bullets {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .strategy-bullets li {
-            padding: 8px 0 8px 30px;
-            position: relative;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        .strategy-bullets li:before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: #d4af37;
-            font-weight: bold;
-        }
-        
-        .context {
-            background: #fdf9f3;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            border-left: 4px solid #c9a961;
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-        
-        .passage-section {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            border: 1px solid #e8dfd5;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-        }
-        
-        .passage-section h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            color: #1a1410;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .passage {
-            font-family: 'Source Serif 4', serif;
-            font-size: 1rem;
-            line-height: 1.8;
-            color: #2c2416;
-        }
-        
-        .passage p {
-            margin-bottom: 15px;
-        }
-        
-        .vocab-term {
-            border-bottom: 2px solid #d4af37;
-            cursor: help;
-            position: relative;
-            font-weight: 600;
-        }
-        
-        .tooltip {
-            visibility: hidden;
-            background-color: #1a1410;
-            color: #f5ede0;
-            text-align: center;
-            padding: 8px 12px;
-            border-radius: 6px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            font-size: 0.8rem;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: normal;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-        
-        .vocab-term:hover .tooltip {
-            visibility: visible;
-        }
-        
-        .form-section {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            border: 1px solid #e8dfd5;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-        }
-        
-        .form-section h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            color: #1a1410;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 10px;
-            color: #1a1410;
-            font-size: 0.95rem;
-        }
-        
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e8dfd5;
-            border-radius: 6px;
-            font-family: 'Source Serif 4', serif;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            resize: vertical;
-            min-height: 100px;
-            transition: border-color 0.3s;
-        }
-        
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #d4af37;
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-        }
-        
-        .submit-btn {
-            background: linear-gradient(135deg, #1a1410, #3d3228);
-            color: #f5ede0;
-            border: 2px solid #d4af37;
-            padding: 14px 40px;
-            font-size: 1rem;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s;
-            letter-spacing: 0.5px;
-        }
-        
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
-        }
-        
-        .submit-btn.loading {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-        
-        .feedback-section {
-            display: none;
-            margin-top: 30px;
-            padding: 25px;
-            border-radius: 8px;
-            animation: slideIn 0.5s ease-out;
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .feedback-section.show {
-            display: block;
-        }
-        
-        .score-banner {
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
-            text-align: center;
-            letter-spacing: 1px;
-            font-weight: bold;
-        }
-        
+        body { background: linear-gradient(135deg, #f5ede0 0%, #ede5d9 100%); font-family: 'Source Serif 4', serif; color: #2c2416; line-height: 1.8; min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: rgba(255, 250, 245, 0.95); border-radius: 12px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08); padding: 40px; }
+        .attempt-counter { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: #6b5d52; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #e8dfd5; }
+        .attempt-dots { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+        .attempt-dot { width: 20px; height: 20px; border-radius: 50%; background: #e8dfd5; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; color: #6b5d52; }
+        .attempt-dot.active { background: #d4af37; color: #1a1410; }
+        .legendary-badge { background: linear-gradient(135deg, #d4af37 0%, #f0e68c 50%, #d4af37 100%); color: #1a1410; font-family: 'Cinzel', serif; font-weight: bold; font-size: 0.85rem; letter-spacing: 2px; padding: 6px 12px; border-radius: 20px; display: inline-block; margin-bottom: 20px; text-transform: uppercase; }
+        .hero { text-align: center; margin-bottom: 40px; }
+        .strategy-card { width: 180px; height: 250px; margin: 0 auto 30px; border-radius: 12px; box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); border: 3px solid rgba(212, 175, 55, 0.6); overflow: hidden; background: white; display: flex; align-items: center; justify-content: center; }
+        .strategy-card img { width: 100%; height: 100%; object-fit: cover; }
+        h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #1a1410; margin-bottom: 10px; }
+        .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: #6b5d52; margin-bottom: 30px; }
+        .learning-objective { background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05)); border-left: 4px solid #d4af37; padding: 20px; margin-bottom: 30px; border-radius: 6px; }
+        .learning-objective p { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; line-height: 1.6; }
+        .strategy-section { background: #fdfbf7; border-radius: 8px; padding: 25px; margin-bottom: 30px; border: 1px solid #e8dfd5; }
+        .strategy-section h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #1a1410; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .strategy-bullets { list-style: none; padding-left: 0; }
+        .strategy-bullets li { padding: 8px 0 8px 30px; position: relative; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; line-height: 1.5; }
+        .strategy-bullets li:before { content: "→"; position: absolute; left: 0; color: #d4af37; font-weight: bold; }
+        .context { background: #fdf9f3; padding: 20px; border-radius: 8px; margin-bottom: 30px; border-left: 4px solid #c9a961; font-size: 0.95rem; line-height: 1.7; }
+        .passage-section { background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #e8dfd5; }
+        .passage-section h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #1a1410; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .passage { font-family: 'Source Serif 4', serif; font-size: 1rem; line-height: 1.8; color: #2c2416; }
+        .passage p { margin-bottom: 15px; }
+        .vocab-term { border-bottom: 2px solid #d4af37; cursor: help; position: relative; font-weight: 600; }
+        .tooltip { visibility: hidden; background-color: #1a1410; color: #f5ede0; text-align: center; padding: 8px 12px; border-radius: 6px; position: absolute; z-index: 1; bottom: 125%; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.8rem; font-family: 'DM Sans', sans-serif; font-weight: normal; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+        .vocab-term:hover .tooltip { visibility: visible; }
+        .form-section { background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #e8dfd5; }
+        .form-section h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #1a1410; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { font-family: 'DM Sans', sans-serif; font-weight: 600; display: block; margin-bottom: 10px; color: #1a1410; font-size: 0.95rem; }
+        .form-group textarea { width: 100%; padding: 15px; border: 2px solid #e8dfd5; border-radius: 6px; font-family: 'Source Serif 4', serif; font-size: 0.95rem; line-height: 1.6; min-height: 100px; transition: border-color 0.3s; }
+        .form-group textarea:focus { outline: none; border-color: #d4af37; box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1); }
+        .submit-btn { background: linear-gradient(135deg, #1a1410, #3d3228); color: #f5ede0; border: 2px solid #d4af37; padding: 14px 40px; font-size: 1rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.3s; }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3); }
+        .submit-btn.loading { opacity: 0.7; cursor: not-allowed; }
+        .feedback-section { display: none; margin-top: 30px; padding: 25px; border-radius: 8px; animation: slideIn 0.5s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback-section.show { display: block; }
+        .score-banner { padding: 20px; border-radius: 8px; margin-bottom: 20px; font-family: 'Cinzel', serif; font-size: 1.3rem; text-align: center; font-weight: bold; }
         .score-0 { background: #ffebee; color: #c62828; border: 2px solid #c62828; }
         .score-1 { background: #fff3e0; color: #e65100; border: 2px solid #e65100; }
         .score-2 { background: #f1f8e9; color: #558b2f; border: 2px solid #558b2f; }
         .score-3 { background: #e8f5e9; color: #2e7d32; border: 2px solid #2e7d32; }
-        
-        .feedback-content {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 6px;
-            margin-bottom: 15px;
-        }
-        
-        .feedback-strength, .feedback-improve, .feedback-next {
-            margin-bottom: 15px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        
-        .feedback-label {
-            font-weight: 600;
-            color: #1a1410;
-            margin-bottom: 5px;
-        }
-        
-        .feedback-text {
-            color: #4a4238;
-            margin-left: 15px;
-            padding-left: 10px;
-            border-left: 3px solid #d4af37;
-        }
-        
-        .revision-checklist {
-            background: rgba(241, 248, 233, 0.5);
-            padding: 15px;
-            border-radius: 6px;
-            border-left: 4px solid #558b2f;
-        }
-        
-        .revision-checklist .feedback-label {
-            margin-bottom: 10px;
-        }
-        
-        .checklist-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 10px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-        
-        .checklist-item input[type="checkbox"] {
-            margin-right: 10px;
-            margin-top: 3px;
-            cursor: pointer;
-        }
-        
-        .checklist-item label {
-            cursor: pointer;
-            flex: 1;
-            margin: 0;
-            font-weight: normal;
-        }
-        
-        .revision-btn {
-            background: linear-gradient(135deg, #558b2f, #689f38);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 0.95rem;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: all 0.3s;
-        }
-        
-        .revision-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(86, 139, 47, 0.3);
-        }
-        
-        .success-screen {
-            display: none;
-            text-align: center;
-            padding: 40px 20px;
-        }
-        
-        .success-screen.show {
-            display: block;
-        }
-        
-        .success-animation {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            animation: bounce 0.8s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .success-message {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: #2e7d32;
-            margin-bottom: 15px;
-        }
-        
-        .success-card {
-            background: linear-gradient(135deg, #d4af37, #f0e68c);
-            padding: 30px;
-            border-radius: 12px;
-            margin: 30px 0;
-            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3);
-            color: #1a1410;
-        }
-        
-        .success-card h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .submission-form {
-            background: #f5f5f5;
-            padding: 30px;
-            border-radius: 8px;
-            margin: 30px 0;
-        }
-        
-        .submission-form h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            color: #1a1410;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .submission-form select {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        .submission-btn {
-            background: #d4af37;
-            color: #1a1410;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1rem;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s;
-            margin-top: 10px;
-        }
-        
-        .submission-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(212, 175, 55, 0.3);
-        }
-        
-        .submission-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        
-        .reset-btn {
-            background: linear-gradient(135deg, #1a1410, #3d3228);
-            color: #f5ede0;
-            border: 2px solid #d4af37;
-            padding: 12px 30px;
-            font-size: 0.95rem;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        
-        .reset-btn:hover {
-            box-shadow: 0 6px 16px rgba(212, 175, 55, 0.3);
-        }
-        
-        @media (max-width: 600px) {
-            .container { padding: 20px; }
-            h1 { font-size: 1.6rem; }
-            .strategy-card { width: 140px; height: 200px; }
-        }
+        .feedback-content { background: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 6px; margin-bottom: 15px; }
+        .feedback-strength, .feedback-improve, .feedback-next { margin-bottom: 15px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; line-height: 1.6; }
+        .feedback-label { font-weight: 600; color: #1a1410; margin-bottom: 5px; }
+        .feedback-text { color: #4a4238; margin-left: 15px; padding-left: 10px; border-left: 3px solid #d4af37; }
+        .revision-checklist { background: rgba(241, 248, 233, 0.5); padding: 15px; border-radius: 6px; border-left: 4px solid #558b2f; }
+        .revision-checklist .feedback-label { margin-bottom: 10px; }
+        .checklist-item { display: flex; align-items: flex-start; margin-bottom: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; cursor: pointer; }
+        .checklist-item input[type="checkbox"] { margin-right: 10px; margin-top: 3px; cursor: pointer; }
+        .checklist-item label { cursor: pointer; flex: 1; margin: 0; font-weight: normal; }
+        .revision-btn { background: linear-gradient(135deg, #558b2f, #689f38); color: white; border: none; padding: 12px 30px; font-size: 0.95rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; margin-top: 15px; }
+        .success-screen { display: none; text-align: center; padding: 40px 20px; }
+        .success-screen.show { display: block; }
+        .success-animation { font-size: 4rem; margin-bottom: 20px; animation: bounce 0.8s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .success-message { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #2e7d32; margin-bottom: 15px; }
+        .success-card { background: linear-gradient(135deg, #d4af37, #f0e68c); padding: 30px; border-radius: 12px; margin: 30px 0; box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3); color: #1a1410; }
+        .success-card h3 { font-family: 'Cinzel', serif; font-size: 1.3rem; margin-bottom: 10px; text-transform: uppercase; }
+        .submission-form { background: #f5f5f5; padding: 30px; border-radius: 8px; margin: 30px 0; }
+        .submission-form h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #1a1410; margin-bottom: 20px; text-transform: uppercase; }
+        .submission-form select { width: 100%; padding: 12px; margin-bottom: 10px; font-family: 'DM Sans', sans-serif; font-size: 1rem; border: 1px solid #ddd; border-radius: 4px; }
+        .submission-btn { background: #d4af37; color: #1a1410; border: none; padding: 12px 30px; font-size: 1rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; transition: all 0.3s; margin-top: 10px; }
+        .submission-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(212, 175, 55, 0.3); }
+        .submission-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .reset-btn { background: linear-gradient(135deg, #1a1410, #3d3228); color: #f5ede0; border: 2px solid #d4af37; padding: 12px 30px; font-size: 0.95rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; margin-top: 20px; }
+        .reset-btn:hover { box-shadow: 0 6px 16px rgba(212, 175, 55, 0.3); }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="attempt-counter">
-            <span style="margin-right: 10px;">Your attempts:</span>
-            <div class="attempt-dots" id="attemptDots"></div>
-        </div>
-        
+        <div class="attempt-counter"><span style="margin-right: 10px;">Your attempts:</span><div class="attempt-dots" id="attemptDots"></div></div>
         <div class="hero">
             <div class="legendary-badge">⚔️ LEGENDARY</div>
-            
-            <div class="strategy-card">
-                <img src="https://drive.google.com/thumbnail?id=16dtAS6pxTh_7ChoNLZJ1UomaNe5m7ty2&sz=w400" alt="Point of View Card" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            
+            <div class="strategy-card"><img src="https://drive.google.com/thumbnail?id=16dtAS6pxTh_7ChoNLZJ1UomaNe5m7ty2&sz=w400" alt="Point of View Card"></div>
             <h1>Whose Voice Gets Heard?</h1>
-            <p class="subtitle">A Reading Task on Whose Perspective Matters</p>
+            <p class="subtitle">A Reading Task on Perspective</p>
         </div>
-        
-        <div class="learning-objective">
-            <p><strong>I can understand different perspectives and whose voice is heard (the most important message) and support it with evidence from the passage.</strong></p>
-        </div>
-        
+        <div class="learning-objective"><p><strong>I can understand different perspectives if people didn't speak up about unfair things.</strong></p></div>
         <div class="strategy-section">
             <h3>📚 Point of View</h3>
             <ul class="strategy-bullets">
-                <li>Point of view is WHO is telling the story point a passage is making — not just details, but the big idea.</li>
-                <li>Supporting details help prove the central idea, but they are not the central idea itself.</li>
-                <li>To find it, ask: What is the author saying is the most important thing I should understand?</li>
-                <li>Good readers ask: Who is speaking? Whose side are we hearing? the main point and the supporting examples.</li>
+                <li>An inference is a smart guess based on clues.</li>
+                <li>The author doesn't say everything. You figure some things out.</li>
+                <li>Look at what happened and ask: What does this mean?</li>
+                <li>Use story clues plus what you know.</li>
             </ul>
         </div>
-        
-        <div class="context">
-            <strong>Why this story matters:</strong> The Stamp Act (1765) was one of the first major conflicts between the British government and American colonists. It led to the phrase "No taxation without representation" — meaning people need a voice in government decisions that affect them. Understanding this helps you see that representation and fairness are connected to power and rights. This is a theme that runs through all of American history.
-        </div>
-        
+        <div class="context"><strong>Why this story matters:</strong> The Boston Massacre (1770) was when British soldiers shot colonists. It happened because people weren't listening to each other. This shows what happens when anger grows too big.</div>
         <div class="passage-section">
             <h3>📖 Reading Passage</h3>
-            
             <div class="passage">
-                <p><strong>The Constitutional Convention - Who Gets Power?</strong></p>
-                
-                <p>In 1765, the British Parliament passed a new law. It said that colonists in America had to pay a tax on every piece of paper they used — newspapers, legal documents, playing cards, licenses. This became known as the <span class="vocab-term">Stamp Act<span class="tooltip">a tax passed by the British Parliament that colonists had to pay on printed paper</span></span>. A stamp proved the tax had been paid. But here's the problem: the colonists had no say in Parliament. They couldn't vote. They didn't elect anyone who could <span class="vocab-term">represent<span class="tooltip">act or speak on behalf of someone in government</span></span> them. The British government made this decision without asking them, without listening to them, and without caring that it would hurt them.</p>
-                
-                <p>The colonists were furious. "No taxation without <span class="vocab-term">representation<span class="tooltip">having a voice or vote in government decisions</span></span>!" they shouted. What did that mean? It meant: you cannot force us to pay taxes for a government we have no voice in. It's not fair. It's not right. Across the colonies, people organized. They <span class="vocab-term">boycotted<span class="tooltip">refused to buy or use something as a form of protest</span></span> British goods. They protested in the streets. They refused to buy the stamped paper. The Stamp Act tax was supposed to make money for Britain. Instead, it made colonists angry enough to demand a voice in their own government.</p>
-                
-                <p>By 1766, just one year later, Parliament <span class="vocab-term">repealed<span class="tooltip">canceled or removed a law</span></span> the Stamp Act. The colonists had won. But the lesson was bigger than one tax. It showed that power without representation is wrong. It showed that ordinary people — farmers, merchants, printers — could organize and demand change. And it showed that governments need to listen to the people they govern, or those people will fight back.</p>
+                <p><strong>The Boston Massacre: When Words Stop Working</strong></p>
+                <p>By 1770, colonists were angry. Taxes were unfair. British soldiers walked around acting mean. People shouted at soldiers. Soldiers pushed back. Nobody listened to anybody. On March 5, 1770, colonists gathered in the streets. They threw snowballs and rocks at British soldiers. The soldiers got scared. One fired his gun. Then others fired too. Five colonists died. One was Crispus Attucks, who had <span class="vocab-term">escaped<span class="tooltip">got away from slavery</span></span> slavery to be free. Now he was dead.</p>
+                <p>The colonists were heartbroken and furious. This became known as the Boston Massacre. It showed what happens when anger gets too big. The soldiers said they were scared. The colonists said the soldiers were bullies. Nobody agreed on what happened. But everybody could see five people were dead. When people stop talking and start throwing things, people get hurt.</p>
+                <p>This event changed everything. Colonists started speaking up louder. They told others, "Look what the British did!" The shooting made people angrier than ever. Some historians say this was the first real fight between colonists and British. It wasn't supposed to be a war—just angry people in a street. But it showed things were getting dangerous. People needed a better way to handle unfairness besides yelling and fighting.</p>
             </div>
         </div>
-        
         <div class="form-section" id="formSection">
             <h3>📝 Your Response</h3>
-            
             <div class="form-group">
-                <label for="mainAnswer"><strong>Main Response Question:</strong> What is the central idea of this passage? Write 2–3 sentences explaining the most important message about representation, fairness, and power.</label>
+                <label for="mainAnswer"><strong>Main Question:</strong> What would have happened if the colonists and soldiers had talked instead of fighting? Write 2–3 sentences.</label>
                 <textarea id="mainAnswer" placeholder="Write your answer here..."></textarea>
             </div>
-            
             <button class="submit-btn" id="submitBtn" onclick="submitResponse()">Submit Your Response</button>
         </div>
-        
         <div class="feedback-section" id="feedbackSection">
             <div class="score-banner" id="scoreBanner"></div>
             <div class="feedback-content">
-                <div class="feedback-strength">
-                    <div class="feedback-label">✓ What You Did Well:</div>
-                    <div class="feedback-text" id="strengthText"></div>
-                </div>
-                <div class="feedback-improve">
-                    <div class="feedback-label">⚡ One Thing to Strengthen:</div>
-                    <div class="feedback-text" id="improveText"></div>
-                </div>
-                <div class="feedback-next">
-                    <div class="feedback-label">→ Next Step:</div>
-                    <div class="feedback-text" id="nextText"></div>
-                </div>
-                <div class="revision-checklist" id="checklistContainer" style="display:none;">
-                    <div class="feedback-label">Before You Revise, Check:</div>
-                    <div id="checklistItems"></div>
-                </div>
+                <div class="feedback-strength"><div class="feedback-label">✓ What You Did Well:</div><div class="feedback-text" id="strengthText"></div></div>
+                <div class="feedback-improve"><div class="feedback-label">⚡ One Thing to Strengthen:</div><div class="feedback-text" id="improveText"></div></div>
+                <div class="feedback-next"><div class="feedback-label">→ Next Step:</div><div class="feedback-text" id="nextText"></div></div>
+                <div class="revision-checklist" id="checklistContainer" style="display:none;"><div class="feedback-label">Before You Revise, Check:</div><div id="checklistItems"></div></div>
             </div>
             <button class="revision-btn" id="revisionBtn" onclick="prepareRevision()" style="display:none;">Try Again</button>
         </div>
-        
         <div class="success-screen" id="successScreen">
             <div class="success-animation">🎉</div>
-            <div class="success-message">Fantastic Work!</div>
-            <p style="font-family: 'DM Sans', sans-serif; font-size: 1rem; color: #4a4238; margin-bottom: 20px;">You've shown strong understanding of central idea and used evidence perfectly.</p>
-            <div class="success-card">
-                <h3>Card Unlocked</h3>
-                <p style="font-family: 'DM Sans', sans-serif; margin-bottom: 0;">Point of View — Legendary Tier</p>
-            </div>
-
+            <div class="success-message">Great Thinking!</div>
+            <p style="font-family: 'DM Sans', sans-serif; font-size: 1rem; color: #4a4238; margin-bottom: 20px;">You figured out what would be different!</p>
+            <div class="success-card"><h3>Card Unlocked</h3><p style="font-family: 'DM Sans', sans-serif; margin-bottom: 0;">Point of View — Legendary Tier</p></div>
             <div class="submission-form">
                 <h3>Submit Your Work to Teacher</h3>
                 <label for="studentName">Your Name:</label>
-                <select id="studentName">
-                    <option value="">Select your name</option>
-                    <option value="Alexandra">Alexandra</option>
-                    <option value="Alice">Alice</option>
-                    <option value="Angie">Angie</option>
-                    <option value="Brett">Brett</option>
-                    <option value="Caleb K">Caleb K</option>
-                    <option value="Caleb V">Caleb V</option>
-                    <option value="Elise">Elise</option>
-                    <option value="Elijah">Elijah</option>
-                    <option value="Emerie">Emerie</option>
-                    <option value="Gavin">Gavin</option>
-                    <option value="Henry">Henry</option>
-                    <option value="James">James</option>
-                    <option value="Jasmine">Jasmine</option>
-                    <option value="Kawin">Kawin</option>
-                    <option value="Kenadie">Kenadie</option>
-                    <option value="Kolumbiauna">Kolumbiauna</option>
-                    <option value="Lucas">Lucas</option>
-                    <option value="Mason">Mason</option>
-                    <option value="Mathis">Mathis</option>
-                    <option value="Nash">Nash</option>
-                    <option value="Savannagh">Savannagh</option>
-                    <option value="Serena">Serena</option>
-                    <option value="Siddhraj">Siddhraj</option>
-                    <option value="Tre">Tre</option>
-                    <option value="Victoria">Victoria</option>
-                    <option value="Vyohan">Vyohan</option>
-                    <option value="Zane">Zane</option>
-                </select>
+                <select id="studentName"><option value="">Select your name</option><option value="Alexandra">Alexandra</option><option value="Alice">Alice</option><option value="Angie">Angie</option><option value="Brett">Brett</option><option value="Caleb K">Caleb K</option><option value="Caleb V">Caleb V</option><option value="Elise">Elise</option><option value="Elijah">Elijah</option><option value="Emerie">Emerie</option><option value="Gavin">Gavin</option><option value="Henry">Henry</option><option value="James">James</option><option value="Jasmine">Jasmine</option><option value="Kawin">Kawin</option><option value="Kenadie">Kenadie</option><option value="Kolumbiauna">Kolumbiauna</option><option value="Lucas">Lucas</option><option value="Mason">Mason</option><option value="Mathis">Mathis</option><option value="Nash">Nash</option><option value="Savannagh">Savannagh</option><option value="Serena">Serena</option><option value="Siddhraj">Siddhraj</option><option value="Tre">Tre</option><option value="Victoria">Victoria</option><option value="Vyohan">Vyohan</option><option value="Zane">Zane</option></select>
                 <button id="submitToTeacherBtn" class="submission-btn" onclick="submitToTeacher(5)">Submit to Teacher Dashboard</button>
-                <p style="font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: #6b5d52; margin-top: 10px; text-align: center;">Your response is locked and submitted when you click Submit.</p>
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: #6b5d52; margin-top: 10px; text-align: center;">Your response is locked when submitted.</p>
             </div>
-
             <button class="reset-btn" onclick="resetForm()">Do Another Task</button>
         </div>
     </div>
-    
     <script>
         let currentAttempt = 0;
-        
         updateAttemptDisplay();
-        
         function updateAttemptDisplay() {
             const dotsContainer = document.getElementById('attemptDots');
             dotsContainer.innerHTML = '';
@@ -711,82 +152,43 @@
                 dotsContainer.appendChild(dot);
             }
         }
-        
-        async function submitResponse() {
+        function submitResponse() {
             const answer = document.getElementById('mainAnswer').value.trim();
-            
-            if (!answer) {
-                alert('Please write your response before submitting.');
-                return;
-            }
-            
-            currentAttempt++;
-            updateAttemptDisplay();
-            
+            if (!answer) { alert('Please write your response before submitting.'); return; }
+            currentAttempt++; updateAttemptDisplay();
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.classList.add('loading');
             submitBtn.textContent = 'Scoring...';
             submitBtn.disabled = true;
-            
-            // Simulate delay for better UX
             setTimeout(() => {
-                const feedback = scoreLocallyTask5(answer);
+                const feedback = scoreLocallyTask2(answer);
                 displayFeedback(feedback);
-                
                 submitBtn.classList.remove('loading');
                 submitBtn.textContent = 'Submit Your Response';
                 submitBtn.disabled = false;
             }, 1500);
         }
-        
-        function scoreLocallyTask5(answer) {
+        function scoreLocallyTask2(answer) {
             const answerLower = answer.toLowerCase();
-            let score = 0;
-            let strength = '';
-            let improve = '';
-            let next = '';
-            let checklist = '';
-            
-            // Check for key concepts (very simple)
-            const hasTax = /tax|stamp|money/.test(answerLower);
-            const hasBad = /unfair|not fair|wrong|bad|mean/.test(answerLower);
-            const hasNoSay = /no say|no choice|couldn't|no voice/.test(answerLower);
-            const hasStopIt = /stop|fight|protest|said no|refused|got rid|won/.test(answerLower);
+            let score = 0, strength = '', improve = '', next = '', checklist = '';
+            const hasTalk = /talk|listen|discuss|communicate|conversation|speak|say/.test(answerLower);
+            const hasDifferent = /different|wouldn't|wouldn't have|not died|nobody died|alive/.test(answerLower);
+            const hasWhy = /because|would have|maybe|possibly|could|might/.test(answerLower);
             const hasLength = answer.split(' ').length > 10;
-            
-            // Scoring logic - simple levels
-            if ((hasBad && hasNoSay && hasLength) || (hasBad && hasStopIt && hasLength)) {
-                score = 3;
-                strength = 'Awesome! You said the big idea.';
-                improve = 'Nothing! You did great!';
-                next = 'Good job!';
-            } else if ((hasTax && hasBad) || (hasNoSay && hasStopIt)) {
-                score = 2;
-                strength = 'Good job! You got the main idea.';
-                improve = 'Add one more sentence about why it was bad or what people did.';
-                next = 'Try again with the checklist.';
-                checklist = 'Did you say it was unfair? Did you say people fought back?';
-            } else if (hasTax || hasBad || hasNoSay) {
-                score = 1;
-                strength = 'You found something important!';
-                improve = 'Think about the BIGGEST idea. What is the story really about?';
-                next = 'Reread. Ask: Was this fair or not fair?';
-                checklist = 'What was bad about the tax? What did people do?';
+            if ((hasTalk && hasDifferent && hasLength) || (hasTalk && hasDifferent && hasWhy)) {
+                score = 3; strength = 'Great job! You figured out what could be different.'; improve = 'Nothing! You got it!'; next = 'You did really well!';
+            } else if ((hasTalk && hasDifferent) || (hasDifferent && hasWhy)) {
+                score = 2; strength = 'Good! You understood the idea.'; improve = 'Add why talking would have helped.'; next = 'Try again with the checklist.'; checklist = 'Did you say what would be different? Did you say why?';
+            } else if (hasTalk || hasDifferent) {
+                score = 1; strength = 'You found something important!'; improve = 'Think about what WOULD have been different if they talked.'; next = 'Reread and think: What was bad about the shooting?'; checklist = 'What would be different if they talked? Would people still be hurt?';
             } else {
-                score = 0;
-                strength = 'You tried! That\'s good.';
-                improve = 'Reread the story. It\'s about a tax.';
-                next = 'Think: Was the tax fair?';
-                checklist = 'Is your answer about THIS story?';
+                score = 0; strength = 'You tried! That\'s good.'; improve = 'Reread the story about the shooting.'; next = 'Think: What was wrong with fighting instead of talking?'; checklist = 'Is your answer about THIS story?';
             }
-            
             return `SCORE:${score}\nSTRENGTH:${strength}\nIMPROVE:${improve}\nNEXT:${next}\nCHECKLIST:${checklist}`;
         }
-        
         function displayFeedback(feedbackText) {
             const lines = feedbackText.split('\n').filter(l => l.trim());
             let score = 0, strength = '', improve = '', next = '', checklist = '';
-            
             lines.forEach(line => {
                 if (line.startsWith('SCORE:')) score = parseInt(line.replace('SCORE:', ''));
                 else if (line.startsWith('STRENGTH:')) strength = line.replace('STRENGTH:', '').trim();
@@ -794,38 +196,29 @@
                 else if (line.startsWith('NEXT:')) next = line.replace('NEXT:', '').trim();
                 else if (line.startsWith('CHECKLIST:')) checklist = line.replace('CHECKLIST:', '').trim();
             });
-            
             const scoreTexts = ['Not Yet', 'Getting There', 'Almost There', 'Perfect!'];
             const scoreClasses = ['score-0', 'score-1', 'score-2', 'score-3'];
-            
             document.getElementById('scoreBanner').textContent = `Score: ${score}/3 — ${scoreTexts[score]}`;
             document.getElementById('scoreBanner').className = `score-banner ${scoreClasses[score]}`;
-            
             document.getElementById('strengthText').textContent = strength;
             document.getElementById('improveText').textContent = improve;
             document.getElementById('nextText').textContent = next;
-            
             const feedbackSection = document.getElementById('feedbackSection');
             feedbackSection.classList.add('show');
-            
             if (score < 2) {
                 const checklistContainer = document.getElementById('checklistContainer');
                 checklistContainer.style.display = 'block';
                 const items = checklist.split('?').filter(i => i.trim());
                 let checklistHTML = '';
-                items.forEach((item, idx) => {
-                    checklistHTML += `<div class="checklist-item"><input type="checkbox" id="check_${idx}"><label for="check_${idx}"> ${item.trim()}</label></div>`;
-                });
+                items.forEach((item, idx) => { checklistHTML += `<div class="checklist-item"><input type="checkbox" id="check_${idx}"><label for="check_${idx}"> ${item.trim()}</label></div>`; });
                 document.getElementById('checklistItems').innerHTML = checklistHTML;
                 document.getElementById('revisionBtn').style.display = 'block';
             } else {
                 document.getElementById('successScreen').classList.add('show');
                 document.querySelector('.form-section').style.display = 'none';
             }
-            
             window.scrollTo(0, document.getElementById('feedbackSection').offsetTop - 100);
         }
-        
         function prepareRevision() {
             document.getElementById('mainAnswer').value = '';
             document.getElementById('feedbackSection').classList.remove('show');
@@ -833,42 +226,24 @@
             document.getElementById('checklistContainer').style.display = 'none';
             window.scrollTo(0, document.querySelector('.form-section').offsetTop - 100);
         }
-        
         function submitToTeacher(taskNumber) {
             const studentName = document.getElementById('studentName').value;
-            if (!studentName) {
-                alert('Please select your name before submitting.');
-                return;
-            }
-
+            if (!studentName) { alert('Please select your name before submitting.'); return; }
             const feedback = document.getElementById('feedbackSection')?.innerText || 'Feedback not captured';
             const answer = document.getElementById('mainAnswer').value;
             const scoreMatch = document.getElementById('scoreBanner')?.innerText.match(/(\d)/);
             const score = scoreMatch ? parseInt(scoreMatch[1]) : 0;
-
-            const submission = {
-                student: studentName,
-                task: taskNumber.toString(),
-                score: score,
-                feedback: feedback,
-                answer: answer,
-                date: new Date().toISOString()
-            };
-
+            const submission = { student: studentName, task: taskNumber.toString(), score: score, feedback: feedback, answer: answer, date: new Date().toISOString() };
             let submissions = JSON.parse(localStorage.getItem('civilRightsSubmissions') || '[]');
             submissions.push(submission);
             localStorage.setItem('civilRightsSubmissions', JSON.stringify(submissions));
-
             alert('✅ Submitted! Your work has been sent to your teacher.');
-            
             const btn = document.getElementById('submitToTeacherBtn');
             btn.disabled = true;
             btn.textContent = 'Submitted ✓';
         }
-        
         function resetForm() {
-            currentAttempt = 0;
-            updateAttemptDisplay();
+            currentAttempt = 0; updateAttemptDisplay();
             document.getElementById('mainAnswer').value = '';
             document.getElementById('feedbackSection').classList.remove('show');
             document.getElementById('successScreen').classList.remove('show');

@@ -12,12 +12,10 @@
         .attempt-dots { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
         .attempt-dot { width: 20px; height: 20px; border-radius: 50%; background: #e8dfd5; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; color: #6b5d52; }
         .attempt-dot.active { background: #d4af37; color: #1a1410; }
-        .legendary-badge { background: linear-gradient(135deg, #d4af37 0%, #f0e68c 50%, #d4af37 100%); color: #1a1410; font-family: 'Cinzel', serif; font-weight: bold; font-size: 0.85rem; letter-spacing: 2px; padding: 6px 12px; border-radius: 20px; display: inline-block; margin-bottom: 20px; text-transform: uppercase; animation: shimmer 3s infinite; }
-        @keyframes shimmer { 0%, 100% { opacity: 0.9; } 50% { opacity: 1; transform: scale(1.02); } }
+        .legendary-badge { background: linear-gradient(135deg, #d4af37 0%, #f0e68c 50%, #d4af37 100%); color: #1a1410; font-family: 'Cinzel', serif; font-weight: bold; font-size: 0.85rem; letter-spacing: 2px; padding: 6px 12px; border-radius: 20px; display: inline-block; margin-bottom: 20px; text-transform: uppercase; }
         .hero { text-align: center; margin-bottom: 40px; }
-        .strategy-card { width: 180px; height: 250px; margin: 0 auto 30px; border-radius: 12px; box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); border: 3px solid rgba(212, 175, 55, 0.6); overflow: hidden; animation: float-card 3s ease-in-out infinite; background: white; display: flex; align-items: center; justify-content: center; }
+        .strategy-card { width: 180px; height: 250px; margin: 0 auto 30px; border-radius: 12px; box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); border: 3px solid rgba(212, 175, 55, 0.6); overflow: hidden; background: white; display: flex; align-items: center; justify-content: center; }
         .strategy-card img { width: 100%; height: 100%; object-fit: cover; }
-        @keyframes float-card { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
         h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #1a1410; margin-bottom: 10px; }
         .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: #6b5d52; margin-bottom: 30px; }
         .learning-objective { background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05)); border-left: 4px solid #d4af37; padding: 20px; margin-bottom: 30px; border-radius: 6px; }
@@ -41,13 +39,13 @@
         .form-group label { font-family: 'DM Sans', sans-serif; font-weight: 600; display: block; margin-bottom: 10px; color: #1a1410; font-size: 0.95rem; }
         .form-group textarea { width: 100%; padding: 15px; border: 2px solid #e8dfd5; border-radius: 6px; font-family: 'Source Serif 4', serif; font-size: 0.95rem; line-height: 1.6; min-height: 100px; transition: border-color 0.3s; }
         .form-group textarea:focus { outline: none; border-color: #d4af37; box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1); }
-        .submit-btn { background: linear-gradient(135deg, #1a1410, #3d3228); color: #f5ede0; border: 2px solid #d4af37; padding: 14px 40px; font-size: 1rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.3s; letter-spacing: 0.5px; }
+        .submit-btn { background: linear-gradient(135deg, #1a1410, #3d3228); color: #f5ede0; border: 2px solid #d4af37; padding: 14px 40px; font-size: 1rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.3s; }
         .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3); }
         .submit-btn.loading { opacity: 0.7; cursor: not-allowed; }
         .feedback-section { display: none; margin-top: 30px; padding: 25px; border-radius: 8px; animation: slideIn 0.5s ease-out; }
         @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .feedback-section.show { display: block; }
-        .score-banner { padding: 20px; border-radius: 8px; margin-bottom: 20px; font-family: 'Cinzel', serif; font-size: 1.3rem; text-align: center; font-weight: bold; letter-spacing: 1px; }
+        .score-banner { padding: 20px; border-radius: 8px; margin-bottom: 20px; font-family: 'Cinzel', serif; font-size: 1.3rem; text-align: center; font-weight: bold; }
         .score-0 { background: #ffebee; color: #c62828; border: 2px solid #c62828; }
         .score-1 { background: #fff3e0; color: #e65100; border: 2px solid #e65100; }
         .score-2 { background: #f1f8e9; color: #558b2f; border: 2px solid #558b2f; }
@@ -61,24 +59,22 @@
         .checklist-item { display: flex; align-items: flex-start; margin-bottom: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; cursor: pointer; }
         .checklist-item input[type="checkbox"] { margin-right: 10px; margin-top: 3px; cursor: pointer; }
         .checklist-item label { cursor: pointer; flex: 1; margin: 0; font-weight: normal; }
-        .revision-btn { background: linear-gradient(135deg, #558b2f, #689f38); color: white; border: none; padding: 12px 30px; font-size: 0.95rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; margin-top: 15px; transition: all 0.3s; }
-        .revision-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(86, 139, 47, 0.3); }
+        .revision-btn { background: linear-gradient(135deg, #558b2f, #689f38); color: white; border: none; padding: 12px 30px; font-size: 0.95rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; margin-top: 15px; }
         .success-screen { display: none; text-align: center; padding: 40px 20px; }
         .success-screen.show { display: block; }
         .success-animation { font-size: 4rem; margin-bottom: 20px; animation: bounce 0.8s infinite; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
         .success-message { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #2e7d32; margin-bottom: 15px; }
         .success-card { background: linear-gradient(135deg, #d4af37, #f0e68c); padding: 30px; border-radius: 12px; margin: 30px 0; box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3); color: #1a1410; }
-        .success-card h3 { font-family: 'Cinzel', serif; font-size: 1.3rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .success-card h3 { font-family: 'Cinzel', serif; font-size: 1.3rem; margin-bottom: 10px; text-transform: uppercase; }
         .submission-form { background: #f5f5f5; padding: 30px; border-radius: 8px; margin: 30px 0; }
-        .submission-form h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #1a1410; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .submission-form h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #1a1410; margin-bottom: 20px; text-transform: uppercase; }
         .submission-form select { width: 100%; padding: 12px; margin-bottom: 10px; font-family: 'DM Sans', sans-serif; font-size: 1rem; border: 1px solid #ddd; border-radius: 4px; }
         .submission-btn { background: #d4af37; color: #1a1410; border: none; padding: 12px 30px; font-size: 1rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; transition: all 0.3s; margin-top: 10px; }
         .submission-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(212, 175, 55, 0.3); }
         .submission-btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .reset-btn { background: linear-gradient(135deg, #1a1410, #3d3228); color: #f5ede0; border: 2px solid #d4af37; padding: 12px 30px; font-size: 0.95rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; margin-top: 20px; }
         .reset-btn:hover { box-shadow: 0 6px 16px rgba(212, 175, 55, 0.3); }
-        @media (max-width: 600px) { .container { padding: 20px; } h1 { font-size: 1.6rem; } .strategy-card { width: 140px; height: 200px; } }
     </style>
 </head>
 <body>
@@ -86,7 +82,7 @@
         <div class="attempt-counter"><span style="margin-right: 10px;">Your attempts:</span><div class="attempt-dots" id="attemptDots"></div></div>
         <div class="hero">
             <div class="legendary-badge">⚔️ LEGENDARY</div>
-            <div class="strategy-card"><img src="https://drive.google.com/uc?export=view&id=16dtAS6pxTh_7ChoNLZJ1UomaNe5m7ty2" alt="Inferences Card" style="width: 100%; height: 100%; object-fit: cover;"></div>
+            <div class="strategy-card"><img src="https://drive.google.com/thumbnail?id=16dtAS6pxTh_7ChoNLZJ1UomaNe5m7ty2&sz=w400" alt="Inferences Card"></div>
             <h1>What If Nobody Spoke Up?</h1>
             <p class="subtitle">A Reading Task on Consequences</p>
         </div>
@@ -138,7 +134,7 @@
                 <label for="studentName">Your Name:</label>
                 <select id="studentName"><option value="">Select your name</option><option value="Alexandra">Alexandra</option><option value="Alice">Alice</option><option value="Angie">Angie</option><option value="Brett">Brett</option><option value="Caleb K">Caleb K</option><option value="Caleb V">Caleb V</option><option value="Elise">Elise</option><option value="Elijah">Elijah</option><option value="Emerie">Emerie</option><option value="Gavin">Gavin</option><option value="Henry">Henry</option><option value="James">James</option><option value="Jasmine">Jasmine</option><option value="Kawin">Kawin</option><option value="Kenadie">Kenadie</option><option value="Kolumbiauna">Kolumbiauna</option><option value="Lucas">Lucas</option><option value="Mason">Mason</option><option value="Mathis">Mathis</option><option value="Nash">Nash</option><option value="Savannagh">Savannagh</option><option value="Serena">Serena</option><option value="Siddhraj">Siddhraj</option><option value="Tre">Tre</option><option value="Victoria">Victoria</option><option value="Vyohan">Vyohan</option><option value="Zane">Zane</option></select>
                 <button id="submitToTeacherBtn" class="submission-btn" onclick="submitToTeacher(2)">Submit to Teacher Dashboard</button>
-                <p style="font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: #6b5d52; margin-top: 10px; text-align: center;">Your response is locked and submitted when you click Submit.</p>
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: #6b5d52; margin-top: 10px; text-align: center;">Your response is locked when submitted.</p>
             </div>
             <button class="reset-btn" onclick="resetForm()">Do Another Task</button>
         </div>
@@ -180,28 +176,13 @@
             const hasWhy = /because|would have|maybe|possibly|could|might/.test(answerLower);
             const hasLength = answer.split(' ').length > 10;
             if ((hasTalk && hasDifferent && hasLength) || (hasTalk && hasDifferent && hasWhy)) {
-                score = 3;
-                strength = 'Great job! You figured out what could be different.';
-                improve = 'Nothing! You got it!';
-                next = 'You did really well!';
+                score = 3; strength = 'Great job! You figured out what could be different.'; improve = 'Nothing! You got it!'; next = 'You did really well!';
             } else if ((hasTalk && hasDifferent) || (hasDifferent && hasWhy)) {
-                score = 2;
-                strength = 'Good! You understood the idea.';
-                improve = 'Add why talking would have helped.';
-                next = 'Try again with the checklist.';
-                checklist = 'Did you say what would be different? Did you say why?';
+                score = 2; strength = 'Good! You understood the idea.'; improve = 'Add why talking would have helped.'; next = 'Try again with the checklist.'; checklist = 'Did you say what would be different? Did you say why?';
             } else if (hasTalk || hasDifferent) {
-                score = 1;
-                strength = 'You found something important!';
-                improve = 'Think about what WOULD have been different if they talked.';
-                next = 'Reread and think: What was bad about the shooting?';
-                checklist = 'What would be different if they talked? Would people still be hurt?';
+                score = 1; strength = 'You found something important!'; improve = 'Think about what WOULD have been different if they talked.'; next = 'Reread and think: What was bad about the shooting?'; checklist = 'What would be different if they talked? Would people still be hurt?';
             } else {
-                score = 0;
-                strength = 'You tried! That\'s good.';
-                improve = 'Reread the story about the shooting.';
-                next = 'Think: What was wrong with fighting instead of talking?';
-                checklist = 'Is your answer about THIS story?';
+                score = 0; strength = 'You tried! That\'s good.'; improve = 'Reread the story about the shooting.'; next = 'Think: What was wrong with fighting instead of talking?'; checklist = 'Is your answer about THIS story?';
             }
             return `SCORE:${score}\nSTRENGTH:${strength}\nIMPROVE:${improve}\nNEXT:${next}\nCHECKLIST:${checklist}`;
         }
@@ -229,9 +210,7 @@
                 checklistContainer.style.display = 'block';
                 const items = checklist.split('?').filter(i => i.trim());
                 let checklistHTML = '';
-                items.forEach((item, idx) => {
-                    checklistHTML += `<div class="checklist-item"><input type="checkbox" id="check_${idx}"><label for="check_${idx}"> ${item.trim()}</label></div>`;
-                });
+                items.forEach((item, idx) => { checklistHTML += `<div class="checklist-item"><input type="checkbox" id="check_${idx}"><label for="check_${idx}"> ${item.trim()}</label></div>`; });
                 document.getElementById('checklistItems').innerHTML = checklistHTML;
                 document.getElementById('revisionBtn').style.display = 'block';
             } else {
@@ -264,8 +243,7 @@
             btn.textContent = 'Submitted ✓';
         }
         function resetForm() {
-            currentAttempt = 0;
-            updateAttemptDisplay();
+            currentAttempt = 0; updateAttemptDisplay();
             document.getElementById('mainAnswer').value = '';
             document.getElementById('feedbackSection').classList.remove('show');
             document.getElementById('successScreen').classList.remove('show');
