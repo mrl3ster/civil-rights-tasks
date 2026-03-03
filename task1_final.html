@@ -573,7 +573,7 @@
             <div class="legendary-badge">⚔️ LEGENDARY</div>
             
             <div class="strategy-card">
-                <img src="https://lh3.googleusercontent.com/d/14xtQJmpkvR_54JhoM-14TfUuPILxfvuj=w400" alt="Central Idea Card" style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="https://drive.google.com/thumbnail?id=14xtQJmpkvR_54JhoM-14TfUuPILxfvuj&sz=w400" alt="Central Idea Card" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
             
             <h1>Your Voice Was Taxed Too</h1>
@@ -747,36 +747,37 @@
             let next = '';
             let checklist = '';
             
-            // Check for key concepts
-            const hasRepresentation = /represent|voice|say/.test(answerLower);
-            const hasPower = /power|government|control|unfair|wrong/.test(answerLower);
-            const hasOrganize = /organiz|protest|demand|fight|won/.test(answerLower);
-            const hasExplanation = answer.split(' ').length > 15;
+            // Check for key concepts (very simple)
+            const hasTax = /tax|stamp|money/.test(answerLower);
+            const hasBad = /unfair|not fair|wrong|bad|mean/.test(answerLower);
+            const hasNoSay = /no say|no choice|couldn't|no voice/.test(answerLower);
+            const hasStopIt = /stop|fight|protest|said no|refused|got rid|won/.test(answerLower);
+            const hasLength = answer.split(' ').length > 10;
             
-            // Scoring logic
-            if (hasRepresentation && hasPower && hasOrganize && hasExplanation) {
+            // Scoring logic - simple levels
+            if ((hasBad && hasNoSay && hasLength) || (hasBad && hasStopIt && hasLength)) {
                 score = 3;
-                strength = 'You identified the central idea about power and representation, and explained how ordinary people created change.';
-                improve = 'Your response was excellent—no major improvements needed.';
-                next = 'Move on to the next task!';
-            } else if ((hasRepresentation && hasPower) || (hasRepresentation && hasOrganize)) {
+                strength = 'Awesome! You said the big idea.';
+                improve = 'Nothing! You did great!';
+                next = 'Good job!';
+            } else if ((hasTax && hasBad) || (hasNoSay && hasStopIt)) {
                 score = 2;
-                strength = 'You identified important parts of the central idea.';
-                improve = 'Add more about how people organized or why power without representation is wrong.';
-                next = 'Use the checklist below to revise your answer.';
-                checklist = 'Did you explain what representation means? Did you say why it matters? Did you mention people organizing?';
-            } else if (hasRepresentation || hasPower) {
+                strength = 'Good job! You got the main idea.';
+                improve = 'Add one more sentence about why it was bad or what people did.';
+                next = 'Try again with the checklist.';
+                checklist = 'Did you say it was unfair? Did you say people fought back?';
+            } else if (hasTax || hasBad || hasNoSay) {
                 score = 1;
-                strength = 'You mentioned an important concept from the passage.';
-                improve = 'You focused on details rather than the main message. Think about the BIG idea the author wants you to understand.';
-                next = 'Reread the passage and think: What is the author trying to teach me about power and fairness?';
-                checklist = 'Did you identify the central idea (not just a detail)? Did you explain why it matters?';
+                strength = 'You found something important!';
+                improve = 'Think about the BIGGEST idea. What is the story really about?';
+                next = 'Reread. Ask: Was this fair or not fair?';
+                checklist = 'What was bad about the tax? What did people do?';
             } else {
                 score = 0;
-                strength = 'You attempted to answer the question.';
-                improve = 'Your answer doesn\'t address the central idea. Focus on the main message about representation and power.';
-                next = 'Reread the passage. The main idea is about people needing a voice in government.';
-                checklist = 'Does your answer address what the passage teaches about representation? Does it explain what\'s unfair about taxation without representation?';
+                strength = 'You tried! That\'s good.';
+                improve = 'Reread the story. It\'s about a tax.';
+                next = 'Think: Was the tax fair?';
+                checklist = 'Is your answer about THIS story?';
             }
             
             return `SCORE:${score}\nSTRENGTH:${strength}\nIMPROVE:${improve}\nNEXT:${next}\nCHECKLIST:${checklist}`;
