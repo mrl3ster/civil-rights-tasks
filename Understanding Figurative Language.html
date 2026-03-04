@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)file:///Users/lesterry/Downloads/task21_figurativelanguage2.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Figurative Language</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: linear-gradient(135deg, #f5ede0 0%, #ede5d9 100%); font-family: 'Source Serif 4', serif; color: #2c2416; line-height: 1.8; min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: rgba(255, 250, 245, 0.95); border-radius: 12px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08); padding: 40px; }
+        .attempt-counter { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: #6b5d52; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #e8dfd5; }
+        .attempt-dots { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+        .attempt-dot { width: 20px; height: 20px; border-radius: 50%; background: #e8dfd5; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; color: #6b5d52; }
+        .attempt-dot.active { background: #90ee90; color: #1a1410; }
+        .uncommon-badge { background: linear-gradient(135deg, #90ee90 0%, #98fb98 50%, #90ee90 100%); color: #1a1410; font-family: 'Cinzel', serif; font-weight: bold; font-size: 0.85rem; letter-spacing: 2px; padding: 6px 12px; border-radius: 20px; display: inline-block; margin-bottom: 20px; text-transform: uppercase; }
+        .hero { text-align: center; margin-bottom: 40px; }
+        h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #1a1410; margin-bottom: 10px; }
+        .subtitle { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: #6b5d52; margin-bottom: 30px; }
+        .learning-objective { background: linear-gradient(135deg, rgba(144, 238, 144, 0.1), rgba(144, 238, 144, 0.05)); border-left: 4px solid #90ee90; padding: 20px; margin-bottom: 30px; border-radius: 6px; }
+        .learning-objective p { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; line-height: 1.6; }
+        .strategy-section { background: #fdfbf7; border-radius: 8px; padding: 25px; margin-bottom: 30px; border: 1px solid #e8dfd5; }
+        .strategy-section h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #1a1410; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .strategy-bullets { list-style: none; padding-left: 0; }
+        .strategy-bullets li { padding: 8px 0 8px 30px; position: relative; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; line-height: 1.5; }
+        .strategy-bullets li:before { content: "→"; position: absolute; left: 0; color: #90ee90; font-weight: bold; }
+        .context { background: #fdf9f3; padding: 20px; border-radius: 8px; margin-bottom: 30px; border-left: 4px solid #c9a961; font-size: 0.95rem; line-height: 1.7; }
+        .passage-section { background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #e8dfd5; }
+        .passage-section h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #1a1410; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .passage { font-family: 'Source Serif 4', serif; font-size: 1rem; line-height: 1.8; color: #2c2416; }
+        .passage p { margin-bottom: 15px; }
+        .vocab-term { border-bottom: 2px solid #90ee90; cursor: help; position: relative; font-weight: 600; }
+        .tooltip { visibility: hidden; background-color: #1a1410; color: #f5ede0; text-align: center; padding: 8px 12px; border-radius: 6px; position: absolute; z-index: 1; bottom: 125%; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.8rem; font-family: 'DM Sans', sans-serif; font-weight: normal; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+        .vocab-term:hover .tooltip { visibility: visible; }
+        .form-section { background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #e8dfd5; }
+        .form-section h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #1a1410; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { font-family: 'DM Sans', sans-serif; font-weight: 600; display: block; margin-bottom: 10px; color: #1a1410; font-size: 0.95rem; }
+        .form-group textarea { width: 100%; padding: 15px; border: 2px solid #e8dfd5; border-radius: 6px; font-family: 'Source Serif 4', serif; font-size: 0.95rem; line-height: 1.6; min-height: 100px; transition: border-color 0.3s; }
+        .form-group textarea:focus { outline: none; border-color: #90ee90; box-shadow: 0 0 0 3px rgba(144, 238, 144, 0.1); }
+        .submit-btn { background: linear-gradient(135deg, #558b2f, #689f38); color: white; border: 2px solid #90ee90; padding: 14px 40px; font-size: 1rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.3s; }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(144, 238, 144, 0.3); }
+        .submit-btn.loading { opacity: 0.7; cursor: not-allowed; }
+        .feedback-section { display: none; margin-top: 30px; padding: 25px; border-radius: 8px; animation: slideIn 0.5s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback-section.show { display: block; }
+        .score-banner { padding: 20px; border-radius: 8px; margin-bottom: 20px; font-family: 'Cinzel', serif; font-size: 1.3rem; text-align: center; font-weight: bold; }
+        .score-0 { background: #ffebee; color: #c62828; border: 2px solid #c62828; }
+        .score-1 { background: #fff3e0; color: #e65100; border: 2px solid #e65100; }
+        .score-2 { background: #f1f8e9; color: #558b2f; border: 2px solid #558b2f; }
+        .score-3 { background: #e8f5e9; color: #2e7d32; border: 2px solid #2e7d32; }
+        .feedback-content { background: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 6px; margin-bottom: 15px; }
+        .feedback-strength, .feedback-improve, .feedback-next { margin-bottom: 15px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; line-height: 1.6; }
+        .feedback-label { font-weight: 600; color: #1a1410; margin-bottom: 5px; }
+        .feedback-text { color: #4a4238; margin-left: 15px; padding-left: 10px; border-left: 3px solid #90ee90; }
+        .revision-checklist { background: rgba(241, 248, 233, 0.5); padding: 15px; border-radius: 6px; border-left: 4px solid #558b2f; }
+        .revision-checklist .feedback-label { margin-bottom: 10px; }
+        .checklist-item { display: flex; align-items: flex-start; margin-bottom: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; cursor: pointer; }
+        .checklist-item input[type="checkbox"] { margin-right: 10px; margin-top: 3px; cursor: pointer; }
+        .checklist-item label { cursor: pointer; flex: 1; margin: 0; font-weight: normal; }
+        .revision-btn { background: linear-gradient(135deg, #558b2f, #689f38); color: white; border: none; padding: 12px 30px; font-size: 0.95rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; margin-top: 15px; }
+        .success-screen { display: none; text-align: center; padding: 40px 20px; }
+        .success-screen.show { display: block; }
+        .success-animation { font-size: 4rem; margin-bottom: 20px; animation: bounce 0.8s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .success-message { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #2e7d32; margin-bottom: 15px; }
+        .success-card { background: linear-gradient(135deg, #90ee90, #98fb98); padding: 30px; border-radius: 12px; margin: 30px 0; box-shadow: 0 12px 30px rgba(144, 238, 144, 0.3); color: #1a1410; }
+        .success-card h3 { font-family: 'Cinzel', serif; font-size: 1.3rem; margin-bottom: 10px; text-transform: uppercase; }
+        .submission-form { background: #f5f5f5; padding: 30px; border-radius: 8px; margin: 30px 0; }
+        .submission-form h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #1a1410; margin-bottom: 20px; text-transform: uppercase; }
+        .submission-form select { width: 100%; padding: 12px; margin-bottom: 10px; font-family: 'DM Sans', sans-serif; font-size: 1rem; border: 1px solid #ddd; border-radius: 4px; }
+        .submission-btn { background: #90ee90; color: #1a1410; border: none; padding: 12px 30px; font-size: 1rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; transition: all 0.3s; margin-top: 10px; }
+        .submission-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(144, 238, 144, 0.3); }
+        .submission-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .reset-btn { background: linear-gradient(135deg, #558b2f, #689f38); color: white; border: 2px solid #90ee90; padding: 12px 30px; font-size: 0.95rem; font-family: 'DM Sans', sans-serif; font-weight: 600; border-radius: 6px; cursor: pointer; margin-top: 20px; }
+        .reset-btn:hover { box-shadow: 0 6px 16px rgba(144, 238, 144, 0.3); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="attempt-counter"><span style="margin-right: 10px;">Your attempts:</span><div class="attempt-dots" id="attemptDots"><div class="attempt-dot ">1</div></div></div>
+        <div class="hero">
+            <div class="uncommon-badge">💚 UNCOMMON</div>
+            <h1>Understanding Figurative Language</h1>
+            <p class="subtitle">A Reading Task on Figurative Language Part 2</p>
+            <div class="strategy-card"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iMjUwIiB2aWV3Qm94PSIwIDAgMTgwIDI1MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojOTBlZTkwIi8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM5OGZiOTgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM5MGVlOTAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjI1MCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjkwIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJDaW56ZWwiIGZvbnQtc2l6ZT0iMzYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMxYTE0MTAiPvCfj4g8L3RleHQ+PHRleHQgeD0iOTAiIHk9IjE1MCIgZm9udC1mYW1pbHk9IkNpbnplbCIgZm9udC1zaXplPSIxMyIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMxYTE0MTAiIGxldHRlci1zcGFjaW5nPSIxIj5GSUdVUkFUSVZFIExBTkc8L3RleHQ+PHRleHQgeD0iOTAiIHk9IjIxMCIgZm9udC1mYW1pbHk9IkRNIFNhbnMiIGZvbnQtc2l6ZT0iMTEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMxYTE0MTAiPlVuY29tbW9uPC90ZXh0Pjwvc3ZnPg==" alt="Figurative Language 2 Card" style="width: 100%; height: 100%; object-fit: cover;"></div>
+        </div>
+        <div class="learning-objective"><p><strong>I can identify and explain figurative language techniques like sound devices, sensory words, idioms, and puns.</strong></p></div>
+        <div class="strategy-section">
+            <h3>📚 Figurative Language</h3>
+            <ul class="strategy-bullets">
+                <li>Figurative language uses words in unexpected ways to create meaning and feeling.</li>
+                <li>Sound devices include alliteration, assonance, and onomatopoeia.</li>
+                <li>Sensory words help readers see, hear, taste, smell, and feel.</li>
+                <li>Idioms have meanings different from the literal words.</li>
+                <li>Puns are plays on words that use double meanings for humor.</li>
+            </ul>
+        </div>
+        <div class="context"><strong>Why this matters:</strong> Authors use figurative language to make writing more interesting and to help readers connect emotionally with the text. Understanding these techniques helps you appreciate how powerful writing can be.</div>
+        <div class="passage-section">
+            <h3>📖 Reading Passage</h3>
+            <div class="passage">
+                <p><strong>The Power of Words</strong></p>
+                <p>Maya sat in the library, her heart <span class="vocab-term">pounding like thunder<span class="tooltip">simile - uses "like"</span></span>. The test was only an hour away. She tried to focus on her notes, but her mind was a whirlwind of thoughts. Her best friend Jamal walked over. "You're going to ace this," he said with a smile. "You've studied hard. Just <span class="vocab-term">keep your chin up<span class="tooltip">idiom - means stay positive</span></span>."</p>
+                <p>Maya studied the sample sentences. One sentence used <span class="vocab-term">onomatopoeia<span class="tooltip">words that sound like what they mean, like "buzz" or "hiss"</span></span>: "The bees buzzed loudly as they flew from flower to flower." Another sentence had a <span class="vocab-term">pun<span class="tooltip">a play on words using double meanings</span></span>: "The math teacher called in sick because she had a lot of problems!" Maya groaned at the joke, but she understood it now.</p>
+                <p>As she turned the pages, she noticed how the author used <span class="vocab-term">sensory words<span class="tooltip">words that appeal to the five senses</span></span> to help readers feel the moment. Words like "golden sunlight," "whispered breeze," and "tangy lemonade" made the story come alive. The passage didn't just tell you what happened—it made you experience it. Maya realized that understanding figurative language wasn't just for getting good grades. It was about seeing how authors paint pictures with words.</p>
+            </div>
+        </div>
+        <div class="form-section" id="formSection">
+            <h3>📝 Your Response</h3>
+            <div class="form-group">
+                <label for="mainAnswer"><strong>Main Question:</strong> Find one example of figurative language in the passage. What type is it? What does it mean? Why did the author use it? Write 3–4 sentences.</label>
+                <textarea id="mainAnswer" placeholder="Write your answer here..."></textarea>
+            </div>
+            <button class="submit-btn" id="submitBtn" onclick="submitResponse()">Submit Your Response</button>
+        </div>
+        <div class="feedback-section" id="feedbackSection">
+            <div class="score-banner" id="scoreBanner"></div>
+            <div class="feedback-content">
+                <div class="feedback-strength"><div class="feedback-label">✓ What You Did Well:</div><div class="feedback-text" id="strengthText"></div></div>
+                <div class="feedback-improve"><div class="feedback-label">⚡ One Thing to Strengthen:</div><div class="feedback-text" id="improveText"></div></div>
+                <div class="feedback-next"><div class="feedback-label">→ Next Step:</div><div class="feedback-text" id="nextText"></div></div>
+                <div class="revision-checklist" id="checklistContainer" style="display:none;"><div class="feedback-label">Before You Revise, Check:</div><div id="checklistItems"></div></div>
+            </div>
+            <button class="revision-btn" id="revisionBtn" onclick="prepareRevision()" style="display:none;">Try Again</button>
+        </div>
+        <div class="success-screen" id="successScreen">
+            <div class="success-animation">🎉</div>
+            <div class="success-message">Excellent Analysis!</div>
+            <p style="font-family: &#39;DM Sans&#39;, sans-serif; font-size: 1rem; color: #4a4238; margin-bottom: 20px;">You understand figurative language!</p>
+            <div class="success-card"><h3>Card Unlocked</h3><p style="font-family: &#39;DM Sans&#39;, sans-serif; margin-bottom: 0;">Figurative Language 2 — Uncommon Tier</p></div>
+            <div class="submission-form">
+                <h3>Submit Your Work to Teacher</h3>
+                <label for="studentName">Your Name:</label>
+                <select id="studentName"><option value="">Select your name</option><option value="Alexandra">Alexandra</option><option value="Alice">Alice</option><option value="Angie">Angie</option><option value="Brett">Brett</option><option value="Caleb K">Caleb K</option><option value="Caleb V">Caleb V</option><option value="Elise">Elise</option><option value="Elijah">Elijah</option><option value="Emerie">Emerie</option><option value="Gavin">Gavin</option><option value="Henry">Henry</option><option value="James">James</option><option value="Jasmine">Jasmine</option><option value="Kawin">Kawin</option><option value="Kenadie">Kenadie</option><option value="Kolumbiauna">Kolumbiauna</option><option value="Lucas">Lucas</option><option value="Mason">Mason</option><option value="Mathis">Mathis</option><option value="Nash">Nash</option><option value="Savannagh">Savannagh</option><option value="Serena">Serena</option><option value="Siddhraj">Siddhraj</option><option value="Tre">Tre</option><option value="Victoria">Victoria</option><option value="Vyohan">Vyohan</option><option value="Zane">Zane</option></select>
+                <button id="submitToTeacherBtn" class="submission-btn" onclick="submitToTeacher(21)">Submit to Teacher Dashboard</button>
+                <p style="font-family: &#39;DM Sans&#39;, sans-serif; font-size: 0.85rem; color: #6b5d52; margin-top: 10px; text-align: center;">Your response is locked when submitted.</p>
+            </div>
+            <button class="reset-btn" onclick="resetForm()">Do Another Task</button>
+        </div>
+    </div>
+    <script>
+        let currentAttempt = 0;
+        updateAttemptDisplay();
+        function updateAttemptDisplay() {
+            const dotsContainer = document.getElementById('attemptDots');
+            dotsContainer.innerHTML = '';
+            for (let i = 1; i <= Math.max(currentAttempt, 1); i++) {
+                const dot = document.createElement('div');
+                dot.className = `attempt-dot ${i <= currentAttempt ? 'active' : ''}`;
+                dot.textContent = i;
+                dotsContainer.appendChild(dot);
+            }
+        }
+        function submitResponse() {
+            const answer = document.getElementById('mainAnswer').value.trim();
+            if (!answer) { alert('Please write your response before submitting.'); return; }
+            currentAttempt++; updateAttemptDisplay();
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = 'Scoring...';
+            submitBtn.disabled = true;
+            setTimeout(() => {
+                const feedback = scoreLocallyTask21(answer);
+                displayFeedback(feedback);
+                submitBtn.classList.remove('loading');
+                submitBtn.textContent = 'Submit Your Response';
+                submitBtn.disabled = false;
+            }, 1500);
+        }
+        function scoreLocallyTask21(answer) {
+            const answerLower = answer.toLowerCase();
+            let score = 0, strength = '', improve = '', next = '', checklist = '';
+            const hasExample = /pounding|thunder|chin up|buzzed|pun|sensory|golden|whispered|tangy/.test(answerLower);
+            const hasType = /simile|metaphor|onomatopoeia|pun|idiom|sensory/.test(answerLower);
+            const hasMeaning = /means|shows|creates|helps|makes/.test(answerLower);
+            const hasReason = /because|so|to|help/.test(answerLower);
+            const hasLength = answer.split(' ').length > 20;
+            if ((hasExample && hasType && hasMeaning && hasReason && hasLength) || (hasExample && hasType && hasMeaning && hasLength)) {
+                score = 3; strength = 'Perfect! You identified and explained the technique clearly.'; improve = 'Nothing! Excellent work!'; next = 'Keep analyzing figurative language!';
+            } else if ((hasExample && hasType && hasMeaning) || (hasExample && hasType && hasLength)) {
+                score = 2; strength = 'Good! You found an example and identified the type.'; improve = 'Explain more about why the author used this technique.'; next = 'Try again with the checklist.'; checklist = 'Did you name the type of figurative language? Did you explain why the author used it?';
+            } else if (hasExample && hasType) {
+                score = 1; strength = 'You found an example!'; improve = 'Add more explanation about what it means and why it matters.'; next = 'Reread and think about the author\'s purpose.'; checklist = 'What is the type of figurative language? What does it make you feel or imagine?';
+            } else {
+                score = 0; strength = 'You tried!'; improve = 'Reread the passage and find a specific example.'; next = 'Look for descriptive or interesting word choices.'; checklist = 'Did you find a clear example from the passage?';
+            }
+            return `SCORE:${score}\nSTRENGTH:${strength}\nIMPROVE:${improve}\nNEXT:${next}\nCHECKLIST:${checklist}`;
+        }
+        function displayFeedback(feedbackText) {
+            const lines = feedbackText.split('\n').filter(l => l.trim());
+            let score = 0, strength = '', improve = '', next = '', checklist = '';
+            lines.forEach(line => {
+                if (line.startsWith('SCORE:')) score = parseInt(line.replace('SCORE:', ''));
+                else if (line.startsWith('STRENGTH:')) strength = line.replace('STRENGTH:', '').trim();
+                else if (line.startsWith('IMPROVE:')) improve = line.replace('IMPROVE:', '').trim();
+                else if (line.startsWith('NEXT:')) next = line.replace('NEXT:', '').trim();
+                else if (line.startsWith('CHECKLIST:')) checklist = line.replace('CHECKLIST:', '').trim();
+            });
+            const scoreTexts = ['Not Yet', 'Getting There', 'Almost There', 'Perfect!'];
+            const scoreClasses = ['score-0', 'score-1', 'score-2', 'score-3'];
+            document.getElementById('scoreBanner').textContent = `Score: ${score}/3 — ${scoreTexts[score]}`;
+            document.getElementById('scoreBanner').className = `score-banner ${scoreClasses[score]}`;
+            document.getElementById('strengthText').textContent = strength;
+            document.getElementById('improveText').textContent = improve;
+            document.getElementById('nextText').textContent = next;
+            const feedbackSection = document.getElementById('feedbackSection');
+            feedbackSection.classList.add('show');
+            if (score < 2) {
+                const checklistContainer = document.getElementById('checklistContainer');
+                checklistContainer.style.display = 'block';
+                const items = checklist.split('?').filter(i => i.trim());
+                let checklistHTML = '';
+                items.forEach((item, idx) => { checklistHTML += `<div class="checklist-item"><input type="checkbox" id="check_${idx}"><label for="check_${idx}"> ${item.trim()}</label></div>`; });
+                document.getElementById('checklistItems').innerHTML = checklistHTML;
+                document.getElementById('revisionBtn').style.display = 'block';
+            } else {
+                document.getElementById('successScreen').classList.add('show');
+                document.querySelector('.form-section').style.display = 'none';
+            }
+            window.scrollTo(0, document.getElementById('feedbackSection').offsetTop - 100);
+        }
+        function prepareRevision() {
+            document.getElementById('mainAnswer').value = '';
+            document.getElementById('feedbackSection').classList.remove('show');
+            document.getElementById('revisionBtn').style.display = 'none';
+            document.getElementById('checklistContainer').style.display = 'none';
+            window.scrollTo(0, document.querySelector('.form-section').offsetTop - 100);
+        }
+        function submitToTeacher(taskNumber) {
+            const studentName = document.getElementById('studentName').value;
+            if (!studentName) { alert('Please select your name before submitting.'); return; }
+            const feedback = document.getElementById('feedbackSection')?.innerText || 'Feedback not captured';
+            const answer = document.getElementById('mainAnswer').value;
+            const scoreMatch = document.getElementById('scoreBanner')?.innerText.match(/(\d)/);
+            const score = scoreMatch ? parseInt(scoreMatch[1]) : 0;
+            const submission = { student: studentName, task: taskNumber.toString(), score: score, feedback: feedback, answer: answer, date: new Date().toISOString() };
+            let submissions = JSON.parse(localStorage.getItem('civilRightsSubmissions') || '[]');
+            submissions.push(submission);
+            localStorage.setItem('civilRightsSubmissions', JSON.stringify(submissions));
+            alert('✅ Submitted! Your work has been sent to your teacher.');
+            const btn = document.getElementById('submitToTeacherBtn');
+            btn.disabled = true;
+            btn.textContent = 'Submitted ✓';
+        }
+        function resetForm() {
+            currentAttempt = 0; updateAttemptDisplay();
+            document.getElementById('mainAnswer').value = '';
+            document.getElementById('feedbackSection').classList.remove('show');
+            document.getElementById('successScreen').classList.remove('show');
+            document.querySelector('.form-section').style.display = 'block';
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('submitToTeacherBtn').disabled = false;
+            document.getElementById('submitToTeacherBtn').textContent = 'Submit to Teacher Dashboard';
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+
+</body></html>
